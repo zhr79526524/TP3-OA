@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="__ADMIN__/css/base.css" />
+<link rel="stylesheet" href="__ADMIN__/css/info-mgt.css" />
+<link rel="stylesheet" href="__ADMIN__/css/WdatePicker.css" />
+<title>移动办公自动化系统</title>
+<style>
+font{
+    color: red;
+}
+.select-title, input{
+    display: inline-block;
+    height: 20px;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+table tr .operate a {
+    vertical-align: 6px;
+}
+tr:nth-child(2n){
+    background-color: rgb(239, 246, 250);
+}
+</style>
+</head>
+
+<body>
+<div class="title"><h2>信息管理</h2></div>
+<div class="table-operate ue-clear">
+	<a href="javascript:;" class="add">添加</a>
+    <a href="javascript:;" class="del">删除</a>
+    <a href="javascript:;" class="edit">编辑</a>
+    <a href="javascript:;" class="count">统计</a>
+    <a href="javascript:;" class="check">审核</a>
+</div>
+<div class="table-box">
+	<table>
+    	<thead>
+        	<tr>
+            	<th class="num">序号</th>
+                <th class="name">部门</th>
+                <th class="process">所属部门</th>
+                <th class="node">排序</th>
+                <th class="time">备注</th>
+                <th class="operate">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <volist name="result" id="vol">
+                <tr>
+                    <td class="num">{$vol.id}</td>
+                    <td class="name">{$vol.name}</td>
+                    <td class="process">
+                        <if condition="$vol.pid == 0 ">顶级部门
+                            <else />&nbsp;&nbsp;<font>{$vol.dename}</font>
+                        </if>
+                    </td>
+                    <td class="node">{$vol.sort}</td>
+                    <td class="time">{$vol.remark}</td>
+                    <td class="operate">
+                        <input type="checkbox" class="chec" value="{$vol.id}">
+                        <a href="__CONTROLLER__/edit/id/{$vol.id}">编辑</a>
+                    </td>
+                </tr>
+            </volist>
+        </tbody>
+    </table>
+</div>
+<div class="pagination ue-clear">
+	<div class="pagin-list">
+		{$show}
+	</div>
+	<div class="pxofy">每页显示 10 条记录，总共{$count}条记录</div>
+</div>
+</body>
+<script type="text/javascript" src="__ADMIN__/js/jquery.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/common.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/WdatePicker.js"></script>
+<script type="text/javascript">
+$(function(){
+
+    $('.del').on('click',function(){
+        // alert();
+        // 获取到元素
+        var box = $(":checkbox:checked");
+        // 空数组
+        var id = '';
+        // 循环取值
+        for(var i= 0;i<box.length;i++){
+
+            id += box[i].value + ',';
+        }
+        id = id.substring(0,id.length-1);
+        window.location.href = './del/id/' + id; 
+    })
+
+    $('.add').on('click',function(){
+        window.location.href = './add';
+    })
+})
+</script>
+</html>

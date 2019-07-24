@@ -1,0 +1,4 @@
+[ 2019-07-20T19:33:07+08:00 ] 127.0.0.1 /thinkphp3.2.3/index.php/Admin/Test/test13
+ERR: 1054:Unknown column 'ti.dept_id' in 'where clause'
+ [ SQL语句 ] : SELECT t1.*,t2.name as detpname FROM sp_user as t1,sp_dept as t2 WHERE ( ti.dept_id = t2.id ) 
+
